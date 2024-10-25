@@ -1,8 +1,6 @@
-README.md
+# Implement Hadoop on AWS:
 
-Implement Hadoop on AWS:
-
-# 1. Deploy on Ubuntu 
+# 1. Deploy on AWS EC2 
 # 2. Set 1 NameNode and 3 dataNodes
 # 3. Authorization Setup:
 	`
@@ -13,23 +11,26 @@ Implement Hadoop on AWS:
 	chmod 700 /home/ubuntu/.ssh
 	chmod 600 /home/ubuntu/.ssh/authorized_keys
 	` 
-# 4. Environment Setup:
+# 4. Environment Setup
 
-	##Install Java
+   ## Install Java
+
+	
 	`
 		sudo apt-get update
 		sudo apt install default-jre
 		sudo apt-get install default-jdk 
 		cd~/
 	`
-	##Download hadoop
+
+   ## Download hadoop
 	`	
 		wget https://mirror.its.dal.ca/apache/hadoop/common/hadoop-3.4.0/hadoop-3.4.0.tar.gz
 		sudo tar xzf hadoop-3.4.0.tar.gz
 		sudo mv hadoop-3.4.0 /usr/local/hadoop
 		sudo chown -R ubuntu /usr/local/hadoop/
 	`
-	##Environmental Varialbe Setup:
+   ## Environmental Varialbe Setup:
 	`
 		chmod 777 ~/.profile
 		vi ~/.profile
@@ -39,14 +40,14 @@ Implement Hadoop on AWS:
 		which java
 		which hadoop
 	`
-	## Hadoop Script Setup
+   ## Hadoop Script Setup
 	`
 		cd /usr/local/hadoop/etc/hadoop/
 	`
-		### hadoop-env.sh
-		`export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64` #should specify java version
+   ### hadoop-env.sh
+	`export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64` #should specify java version
 
-		### core-site.xml
+   ### core-site.xml
 		`
 		<configuration> 
 			<property>
@@ -61,7 +62,7 @@ Implement Hadoop on AWS:
 		</configuration>
 		`
 
-		### hdfs-site.xml
+   ### hdfs-site.xml
 		`
 		<configuration> 
 			<property>
@@ -79,7 +80,7 @@ Implement Hadoop on AWS:
 		</configuration>
 		`
 
-		### mapred-site.xml
+   ### mapred-site.xml
 
 		`
 		<configuration>
@@ -98,7 +99,7 @@ Implement Hadoop on AWS:
 		</configuration>
 		`
 
-		### yarn-site.xml
+   ### yarn-site.xml
 
 		`
 		<configuration> 
@@ -118,7 +119,7 @@ Implement Hadoop on AWS:
 		</configuration>
 		`
 
-	## Hadoop Master-slaves Setup
+   ## Hadoop Master-slaves Setup
 
 		namenode:
 		`
@@ -135,29 +136,29 @@ Implement Hadoop on AWS:
 			`
 		`
 
-	## create hdfs file system
+## create hdfs file system
 
 		On namenode:
 		`/usr/local/hadoop/bin/hdfs namenode -format`
 
-	## start hdfs and yarn
+## start hdfs and yarn
 
 		Hdfs is responsible for maintaining hdfs distributed file system and yarn for containers and resource management.
 
 		`/usr/local/hadoop/sbin/start-dfs.sh` 
 		`/usr/local/hadoop/sbin/start-yarn.sh`
 
-	## verify if run successfully
+## verify if run successfully
 		`hdfs dfsadmin -report`
 
-	##run example to verify if it start successfully
+## run example to verify if it start successfully
 		`hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.0.jar pi 10 1000`
 		should specify version
 
 
 # Implement MapReduce
 	
-	## MapReduce Test
+## MapReduce Test
 	1. Copy and Paste mapper.py and reducer.py for testing
 	2. download sample file for testing
 		`wget https://www.gutenberg.org/files/20417/20417-8.txt`
@@ -166,7 +167,7 @@ Implement Hadoop on AWS:
 
 	4. shell show the word, count pair 
 
-	## Implement MapReduce via Hadoop
+## Implement MapReduce via Hadoop
 
 	1. download text:
 		`
